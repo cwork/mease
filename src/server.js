@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const path = require('path');
 const dbConnect = require('./config/db');
 
+const errorHandler = require('./middleware/errorHandler');
+
 // Load environmental variables
 dotenv.config({ path: path.join(__dirname, 'config/config.env') });
 
@@ -17,6 +19,10 @@ const port = process.env.PORT || 5000;
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+// Pass router middleware
+// ...
+app.use(errorHandler);
 
 const server = app.listen(
   port,
